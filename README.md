@@ -14,7 +14,7 @@ nge --help
  _ _  __ _ |  ____| ___ ____ ____ _  _ ____ ___ _
 | ' \/ _` ||  ____| ALLWISSEND ENTERPRISE APP KIT
 |_||_\__, /|______| _  ____ __ _ _______  _ ___ _
-     |___/
+     |___/  V1.3.7
 
 Usage: nge [new|update|config|list|<script>] [options]
 
