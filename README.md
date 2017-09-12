@@ -4,12 +4,46 @@ CLI for creating Angular World Class apps with nge generators
 ## Installation
 
 ```sh
-npm install -g @ngx-rocket/cli
+npm install -g @allwissend-nge/cli
 ```
 
 ## Usage
+```sh
+nge --help
+            ______ 
+ _ _  __ _ |  ____| ___ ____ ____ _  _ ____ ___ _
+| ' \/ _` ||  ____| ALLWISSEND ENTERPRISE APP KIT
+|_||_\__, /|______| _  ____ __ _ _______  _ ___ _
+     |___/
+
+Usage: nge [new|update|config|list|<script>] [options]
+
+n, new [name]
+  Creates a new app.
+  -a, --addon  Creates an add-on instead.
+
+u, update
+  Updates an existing app or add-on.
+
+c, config
+  Configures add-ons to use for new apps.
+  All available add-ons are used by default.
+
+l, list
+  Lists available add-ons.
+  -n, --npm    Show installable add-ons on NPM
+  
+<script>
+  Runs specified script from your package.json.
+  Works just like npm run <script>
+```
 
 ## Generating and serving a project via a development server
+
+```sh
+nge new
+npm start
+```
 
 ## Updating an existing project
 
