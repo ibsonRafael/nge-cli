@@ -4,7 +4,7 @@ CLI for creating Angular World Class apps with nge generators
 ## Installation
 
 ```sh
-npm install -g @allwissend-nge/cli
+npm install -g nge-cli
 ```
 
 ## Usage
@@ -12,9 +12,9 @@ npm install -g @allwissend-nge/cli
 nge --help
             ______ 
  _ _  __ _ |  ____| ___ ____ ____ _  _ ____ ___ _
-| ' \/ _` ||  ____| ALLWISSEND ENTERPRISE APP KIT
+| ' \/ _` ||  ____| - C L I
 |_||_\__, /|______| _  ____ __ _ _______  _ ___ _
-     |___/  V1.3.7
+     |___/  V1.3.7  ANGULAR 2 ENTERPRISE APP KIT
 
 Usage: nge [new|update|config|list|<script>] [options]
 
