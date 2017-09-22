@@ -47,10 +47,7 @@ const banner = `
 | ' \\/ _\`||  ____| - C L I
 |_||_\\__, /|______| _  ____ __ _ _______  _ ___ _
      |___/  V1.3.7  ANGULAR 2 ENTERPRISE APP KIT
-
 `;
-
- 
 
 class NgECli {
     constructor(args) {
