@@ -1,6 +1,6 @@
 {
   "name": "nge-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "CLI for creating Angular apps with ngE generators",
   "repository": "ibsonRafael/nge-cli",
   "main": "index.js",
@@ -43,7 +43,7 @@
     "minimist": "^1.2.0",
     "update-notifier": "^2.2.0",
     "yeoman-environment": "^2.0.0",
-    "swagger-parser":"^3.2.0"
+    "swagger-parser": "^3.2.0"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
