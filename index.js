@@ -21,23 +21,36 @@ const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|confi
 
 
 const detailedHelp = `
-${chalk.blue('n, new')} [name]
-  Creates a new app.
-  -a, --addon  Creates an add-on instead.
-${chalk.blue('u, update')}
-  Updates an existing app or add-on.
-${chalk.blue('c, config')}
-  Configures add-ons to use for new apps.
-  All available add-ons are used by default.
-${chalk.blue('l, list')}
+${chalk.yellow('Usage:')}
+  nge [command] name [options]
+  
+${chalk.yellow('Available commands:')}
+${chalk.green('n, new')} [name] 
+    Creates a new enterprise app.
+${chalk.green('u, update')}
+    Updates an existing app or add-on.
+${chalk.green('c, config')}
+    Configures add-ons to use for new apps.
+    All available add-ons are used by default.
+${chalk.green('l, list')}
   Lists available add-ons.
   -n, --npm    Show installable add-ons on NPM
   
-${chalk.blue('<script>')}
-  Runs specified script from your ${chalk.bold(`package.json`)}.
+${chalk.green('<script>')}
+  Runs specified script from your ${chalk.red(`package.json`)}.
   Works just like ${chalk.bold(`npm run <script>`)}
 `;
 
+const banner = `
+             ______ 
+ _ _  __ _  |  ____| ___ ____ ____ _  _ ____ ___ _
+| ' \\/ _\`||  ____| - C L I
+|_||_\\__, /|______| _  ____ __ _ _______  _ ___ _
+     |___/  V1.3.7  ANGULAR 2 ENTERPRISE APP KIT
+
+`;
+
+ 
 
 class NgECli {
     constructor(args) {
@@ -106,7 +119,8 @@ class NgECli {
     _findPackageJson(basePath) {}
 
     _help(details) {
-        console.log("LOGO ASCII");
+        console.log(banner);
+        console.log(detailedHelp);
     }
 
     _exit(error, code = 1) {
