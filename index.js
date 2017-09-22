@@ -76,6 +76,64 @@ class NgECli {
             return this._help(true);
         }
         switch (this._args[0]) {
+            case 'ecm':
+            case 'ecmodule':
+                // Generate interface
+
+                // Generate forms/crud
+
+                //Generate Services  Modules
+                this._exit(`Generate/Update ${chalk.blue('ServicesModule')}`);
+                child.spawnSync('ng g module ServicesModule --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+                this._exit(`Generate ${chalk.blue('NameService')}`);
+                child.spawnSync('ng g module ServicesModule/' + _args[1] + 'Service --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+
+
+
+                //Generate Domains Modules
+                //Domain modules shouldn't export anything
+                this._exit(`Generate ${chalk.blue('NameModule')}`);
+                child.spawnSync('ng g module ' + _args[1] + 'Module --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+
+
+
+                //Generate Routing Modules
+                this._exit(`Generate/Update ${chalk.blue('RoutingModule')}`);
+                child.spawnSync('ng g module RoutingModule --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+                this._exit(`Generate ${chalk.blue('NameRouting')}`);
+                child.spawnSync('ng g module RoutingModule/' + _args[1] + 'Routing --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+
+
+
+                //Generate Widgets/Pipes Modules
+                this._exit(`Generate/Update ${chalk.blue('WidgetsModule')}`);
+                child.spawnSync('ng g module WidgetsModule --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+                this._exit(`Generate ${chalk.blue('NameWidget')}`);
+                child.spawnSync('ng g module ' + _args[1] + 'WidgetsModules --spec false --routing false', ['run'], {
+                    stdio: 'inherit',
+                    shell: isWin
+                });
+
+                //TODO Create widgets/pipes
+
             case 'n':
             case 'new':
                 return this.generate(false, this._args.slice(1), this._options.addon);
