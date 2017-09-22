@@ -81,19 +81,23 @@ class NgECli {
         switch (this._args[0]) {
             case 'n':
             case 'new':
+                return this.generate(false, this._args.slice(1), this._options.addon);
                 this._exit(`Says ${chalk.blue('nge new')}`);
 
             case 'u':
             case 'update':
                 this._exit(`Says ${chalk.blue('nge update')}`);
+                return this.generate(true, this._args.slice(1), this._options.addon);
 
             case 'c':
             case 'config':
                 this._exit(`Says ${chalk.blue('nge config')}`);
+                return this.configure();
 
             case 'l':
             case 'list':
                 this._exit(`Says ${chalk.blue('nge list')}`);
+                return this.list(this._options.npm);
 
             default:
                 this._exit(`Says ${chalk.blue('Ha-ah! You cant tell me nothing!')}`);
