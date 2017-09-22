@@ -42,7 +42,8 @@
     "inquirer": "^3.0.6",
     "minimist": "^1.2.0",
     "update-notifier": "^2.2.0",
-    "yeoman-environment": "^2.0.0"
+    "yeoman-environment": "^2.0.0",
+    "swagger-parser":"^3.2.0"
   },
   "devDependencies": {
     "eslint": "^4.3.0",

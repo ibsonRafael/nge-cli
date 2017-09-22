@@ -3,12 +3,17 @@
 const path = require('path');
 const fs = require('fs');
 const child = require('child_process');
+const { spawnSync} = require('child_process');
 const Conf = require('conf');
 const inquirer = require('inquirer');
 const env = require('yeoman-environment').createEnv();
 const chalk = require('chalk');
 const figures = require('figures');
 const minimist = require('minimist');
+
+//const swgparser = new SwaggerParser();
+var swgparser = require('swagger-parser');
+
 
 const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
@@ -49,7 +54,20 @@ const banner = `
      |___/  V1.3.7  ANGULAR 2 ENTERPRISE APP KIT
 `;
 
+
+const dictionarie = {
+    'post':'Save',
+    'put':'Update'
+}
+
 class NgECli {
+    // capitalizeFirstLetter(string) {
+    //     return string.charAt(0).toUpperCase() + string.slice(1);
+    // }
+    // deCapitalizeFirstLetter(string) {
+    //     return string.charAt(0).toLowerCase() + string.slice(1);
+    // }
+
     constructor(args) {
         this._args = args;
         this._options = minimist(args, {
@@ -78,61 +96,67 @@ class NgECli {
         switch (this._args[0]) {
             case 'ecm':
             case 'ecmodule':
-                // Generate interface
 
-                // Generate forms/crud
+                // //Generate Services  Modules
+                // console.log(`Generate/Update ${chalk.blue('ServicesModule')}`);
+                // let c = child.spawnSync('ng', ['g','module','ServicesModule','--spec','false','--routing', 'false']);
+                //
+                // console.log(`Generate ${chalk.blue(this._args[1] + 'Services')} Module`);
+                // c = child.spawnSync('ng', ['g','module','ServicesModule/' + this._args[1] + 'Services','--spec','false','--routing','false']);
 
-                //Generate Services  Modules
-                this._exit(`Generate/Update ${chalk.blue('ServicesModule')}`);
-                child.spawnSync('ng g module ServicesModule --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
-                });
-                this._exit(`Generate ${chalk.blue('NameService')}`);
-                child.spawnSync('ng g module ServicesModule/' + _args[1] + 'Service --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
-                });
+                var name = this._args[1];
+                swgparser.parse( "api.yaml", null, function(err, api) {
+                    console.log( "API name: %s, Version: %s", api.info.title, api.info.version );
+                    //var api = api.paths[ '/' + name.toLowerCase() ];
+                    for (var paths in api.paths) {
+                        if(paths.indexOf(name.toLowerCase()) < 0 ){
+                            continue;
+                        }
+                        console.log(paths);
+                        paths = api.paths[ paths ];
+                        console.log(paths);
+                        for (var property in paths) {
+                            var serviceName = typeof(dictionarie[property]) != "undefined" ? dictionarie[property] : property
+                            serviceName = serviceName.charAt(0).toUpperCase() + serviceName.slice(1);
+                            name = name.charAt(0).toUpperCase() + name.slice(1);
 
+                            var methodName = typeof ( paths[property].operationId) == 'string'?paths[property].operationId:'do' + serviceName;
 
-
-                //Generate Domains Modules
-                //Domain modules shouldn't export anything
-                this._exit(`Generate ${chalk.blue('NameModule')}`);
-                child.spawnSync('ng g module ' + _args[1] + 'Module --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
-                });
-
-
-
-                //Generate Routing Modules
-                this._exit(`Generate/Update ${chalk.blue('RoutingModule')}`);
-                child.spawnSync('ng g module RoutingModule --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
-                });
-                this._exit(`Generate ${chalk.blue('NameRouting')}`);
-                child.spawnSync('ng g module RoutingModule/' + _args[1] + 'Routing --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
+                            console.log(`Generate ${ chalk.blue(serviceName + name + 'Service')} Service from ${ chalk.green('Swagger')}`);
+                            console.log(` whith method ${ chalk.blue(methodName)} using ${ chalk.blue(property)} http method`);
+                        }
+                        console.log(` `);
+                    }
                 });
 
-
-
-                //Generate Widgets/Pipes Modules
-                this._exit(`Generate/Update ${chalk.blue('WidgetsModule')}`);
-                child.spawnSync('ng g module WidgetsModule --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
-                });
-                this._exit(`Generate ${chalk.blue('NameWidget')}`);
-                child.spawnSync('ng g module ' + _args[1] + 'WidgetsModules --spec false --routing false', ['run'], {
-                    stdio: 'inherit',
-                    shell: isWin
-                });
-
-                //TODO Create widgets/pipes
+            //
+            //
+            // //Generate Domains Modules
+            // //Domain modules shouldn't export anything
+            // console.log(`Generate ${chalk.blue(this._args[1] + 'Module')} Domain/Feature`);
+            // child.spawnSync('ng', ['g','module', this._args[1] + 'Module','--spec','false','--routing','false']);
+            //
+            // // Generate interface
+            //
+            // // Generate forms/crud
+            //
+            //
+            //
+            // //Generate Routing Modules
+            // console.log(`Generate/Update ${chalk.blue('RoutingModule')}`);
+            // child.spawnSync('ng', ['g','module','RoutingModule','--spec','false','--routing','false']);
+            // console.log(`Generate ${chalk.blue(this._args[1] + 'Routing')}`);
+            // child.spawnSync('ng', ['g','module','RoutingModule/' + this._args[1] + 'Routing','--spec','false','--routing','false']);
+            //
+            //
+            //
+            // //Generate Widgets/Pipes Modules
+            // console.log(`Generate/Update ${chalk.blue('WidgetsModule')}`);
+            // child.spawnSync('ng', ['g','module','WidgetsModule','--spec','false','--routing','false']);
+            // console.log(`Generate ${chalk.blue(this._args[1] +'Widgets')} module`);
+            // child.spawnSync('ng', ['g','module', 'WidgetsModule/' + this._args[1] + 'Widgets','--spec','false','--routing','false']);
+            //
+            // //TODO Create widgets/pipes
 
             case 'n':
             case 'new':
